@@ -53,6 +53,18 @@ void push_back(Node* &L, int value){
     }
 }
 
+void insert(Node* &L, Node* prev, int value){
+    Node* nn = new Node;
+    nn->data = value;
+    if(prev == nullptr){
+        nn->next = L;
+        L = nn;
+    }else{
+        nn->next = prev->next;
+        prev->next = nn;
+    }
+}
+
 void print_list(Node* L){
     std::cout << "* -> ";
     while(L != nullptr){
@@ -66,15 +78,20 @@ void print_list(Node* L){
 int main(){
 
     Node* L = build123();
+    Node* prev = L->next;
 
     print_list(L);
 
+    std::cout << "Insertion front: \n";
     push_front(L, 0);
-
     print_list(L);
 
+    std::cout << "Insertion back: \n";
     push_back(L, 5);
+    print_list(L);
 
+    std::cout << "Insertion center: \n";
+    insert(L, prev, 4);
     print_list(L);
 
     return 0;
